@@ -35,8 +35,21 @@ const Navbar = () => {
         <img className="w-32 cursor-pointer" src="./devchallenges.svg" alt="" onClick={() => {!session ? window.location.href = '/' : null}}/>
         {session ?  (
         <div className='flex justify-center items-center gap-1 md:gap-3' >
-            <img className="w-7 rounded-sm" src={session.user?.image} alt="Logo" />
-            <h1>{session?.user?.name}</h1>
+            
+            {
+                    session.user.image ? (
+                        <img className="w-7 rounded-sm" src={session.user?.image} alt="Logo" />
+                        ) : (
+                        //backround image tailwind on div
+                        <div className='bg-green-500 w-7 rounded-sm flex justify-center items-center'>
+                            <h1 className='text-xl font-bold text-white drop-shadow-2xl ' >{session?.user?.name?.charAt(0).toUpperCase()}</h1>
+                        </div>
+                    )
+                }
+
+
+
+            <h1 className='capitalize' >{session?.user?.name}</h1>
             <IoMdArrowDropdown   className='cursor-pointer' onClick={()=>{
                 setOpen(!open)
                 }}/>

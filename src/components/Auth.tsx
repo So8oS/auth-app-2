@@ -19,17 +19,19 @@ const Auth = () => {
     setVarient((currentVarient) => currentVarient === 'login' ? 'register' : 'login');
   }, []);
 
-  const login = useCallback(async () => {  
-      try {
+  const login = useCallback(async () => {
+    try {
       await signIn('credentials', {
-        email:email,
-        password:password,
-        redirect: false,
-        callbackUrl: 'http://localhost:3000/account',});
+        email,
+        password,
+        callbackUrl: '/'
+      });
+
+      router.push('/');
     } catch (error) {
-      console.log("error", error);
+      console.log(error);
     }
-  }, [email , password ])
+  }, [email, password , router]);
 
 
 
@@ -94,6 +96,7 @@ const Auth = () => {
               placeholder="Password"
             />
           </div>
+
           <button 
               className='bg-[#2F80ED] w-full md:w-[18rem] h-9 text-white text rounded-lg' 
               onClick={varient === 'login' ? login : register} >{varient === 'login' ? "Sign In" : "Register"  }</button>
